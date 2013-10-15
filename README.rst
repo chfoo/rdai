@@ -19,11 +19,11 @@ Example with GNU parallel and grep::
 Use the ``--json`` option to parse JSON dumps such as the Archive Team Twitter
 Stream scrapes: https://archive.org/details/twitterstream ::
 
-    find -iname "*.zip" | parallel python3 rdai.py --json "{}" | grep -o -P "bit\.ly/[a-zA-Z0-9]+"
+    find -iname "*.zip" | parallel --ungroup --eta python3 rdai.py --json "{}" | grep -o -P "bit\.ly/[a-zA-Z0-9]+" > urls.txt
 
 
 Bugs
-====
+++++
 
 * Does not handle infinite recursion.
 * No setup.py
