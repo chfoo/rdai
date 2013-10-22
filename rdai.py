@@ -9,10 +9,21 @@ import zipfile
 import tarfile
 import argparse
 import logging
-import json
+import warnings
 
 
-__version__ = '1.0'
+try:
+    import ujson as json
+except ImportError:
+    warnings.warn('Optional ujson module is not available')
+    try:
+        import simplejson as json
+    except ImportError:
+        warnings.warn('Optional simplejson module is not available')
+        import json
+
+
+__version__ = '1.1'
 
 _logger = logging.getLogger(__name__)
 
@@ -49,7 +60,7 @@ def read_archive(file_obj, filename):
             yield from read_file(file_obj, info.filename)
     else:
         _logger.debug('Opening as tar')
-        archive = tarfile.TarFile(file_obj)
+        archive = tarfile.TarFile(fileobj=file_obj)
 
         while True:
             info = archive.next()

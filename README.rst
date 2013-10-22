@@ -22,6 +22,15 @@ Stream scrapes: https://archive.org/details/twitterstream ::
     find -iname "*.zip" | parallel --ungroup --eta python3 rdai.py --json "{}" | grep -o -P "bit\.ly/[a-zA-Z0-9]+" > urls.txt
 
 
+JSON performance
+++++++++++++++++
+
+For better JSON performance install ujson or simplejson::
+
+    pip3 install ujson
+    pip3 install simplejson
+
+
 Bugs
 ++++
 
